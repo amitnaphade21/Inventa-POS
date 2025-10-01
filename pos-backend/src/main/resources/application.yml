@@ -32,10 +32,10 @@ app:
 
 logging:
   level:
-    root: INFO
-    org.hibernate.SQL: DEBUG           # SQL queries
-    org.hibernate.type: WARN           # suppress type registration
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  
+    root: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
             
             
