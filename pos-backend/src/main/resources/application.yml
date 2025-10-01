@@ -36,6 +36,10 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
-        type:
+        type: INFO
           descriptor:
             sql: TRACE
+
+            
+            
+
