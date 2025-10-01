@@ -6,7 +6,7 @@ spring:
     url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQL_DATABASE}
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQLUSER}
-    password: ${MYSQLPASSWORD}
+    password: ${MYSQL_ROOT_PASSWORD}
 
   jpa:
     hibernate:
@@ -17,7 +17,7 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
 server:
-  port: ${PORT:5000}
+  port: ${MYSQLPORT:5000}
 
 
 razorpay:
