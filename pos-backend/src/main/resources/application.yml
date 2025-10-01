@@ -3,7 +3,8 @@ spring:
     name: pos-system
 
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:pos}
+    # Use host.docker.internal to let container access MySQL on host
+    url: jdbc:mysql://${DB_HOST:host.docker.internal}:${DB_PORT:3301}/${DB_NAME:pos}
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
@@ -12,6 +13,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
   mail:
     host: smtp.gmail.com
@@ -30,8 +34,7 @@ spring:
       enabled: true
 
 server:
-  # ✅ Use Railway’s provided PORT env, default 8080 locally
-  port: ${PORT:8080}
+  port: ${PORT:5000}
 
 razorpay:
   api:
@@ -44,7 +47,6 @@ stripe:
 
 app:
   frontend:
-    # ✅ local fallback; override in Railway to Vercel domain
     reset-url: ${FRONTEND_RESET_URL:http://localhost:5173/auth/reset-password?token=}
 
 logging:
