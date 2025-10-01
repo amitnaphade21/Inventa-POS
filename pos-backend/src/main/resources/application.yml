@@ -17,7 +17,7 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
 server:
-  port: ${PORT}
+  port: ${PORT=8080}
 
 
 razorpay:
