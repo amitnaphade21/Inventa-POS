@@ -37,16 +37,11 @@ public class AuthController {
     private final UserService userService;
     private final AuthService authService;
 
-
-
+    // ================= POST endpoints =================
     @PostMapping("/signup")
     public ResponseEntity<ApiResponseBody<AuthResponse>> signupHandler(
             @RequestBody @Valid UserDTO req) throws UserException {
-
-
-        AuthResponse response=authService.signup(req);
-
-
+        AuthResponse response = authService.signup(req);
         return ResponseEntity.ok(new ApiResponseBody<>(true,
                 "User created successfully", response));
     }
@@ -54,9 +49,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponseBody<AuthResponse>> loginHandler(
             @RequestBody LoginDto req) throws UserException {
-
-        AuthResponse response=authService.login(req.getEmail(), req.getPassword());
-
+        AuthResponse response = authService.login(req.getEmail(), req.getPassword());
         return ResponseEntity.ok(new ApiResponseBody<>(
                 true,
                 "User logged in successfully",
@@ -65,26 +58,42 @@ public class AuthController {
 
     @PostMapping("/forgot-password")
     public ResponseEntity<ApiResponse> forgotPassword(
-            @RequestBody ForgotPasswordRequest request
-    ) throws UserException {
-
+            @RequestBody ForgotPasswordRequest request) throws UserException {
         authService.createPasswordResetToken(request.getEmail());
-
-        ApiResponse res= new ApiResponse(
-                "A Reset link was sent to your email."
-        );
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(new ApiResponse("A Reset link was sent to your email."));
     }
 
     @PostMapping("/reset-password")
     public ResponseEntity<ApiResponse> resetPassword(
             @RequestBody ResetPasswordRequest request) {
-         authService.resetPassword(request.getToken(), request.getPassword());
-        ApiResponse res= new ApiResponse(
-                "Password reset successful"
-        );
-        return ResponseEntity.ok(res);
+        authService.resetPassword(request.getToken(), request.getPassword());
+        return ResponseEntity.ok(new ApiResponse("Password reset successful"));
     }
 
+    // ================= GET endpoints (temporary) =================
+    @GetMapping("/signup")
+    public ResponseEntity<String> signupGet() {
+        return ResponseEntity.ok("This endpoint expects a POST request with JSON body");
+    }
 
+    @GetMapping("/onboarding")
+    public ResponseEntity<String> onboardingGet() {
+        return ResponseEntity.ok("This endpoint expects a POST request with JSON body");
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<String> loginGet() {
+        return ResponseEntity.ok("This endpoint expects a POST request with JSON body");
+    }
+
+    @GetMapping("/forgot-password")
+    public ResponseEntity<String> forgotPasswordGet() {
+        return ResponseEntity.ok("This endpoint expects a POST request with JSON body");
+    }
+
+    @GetMapping("/reset-password")
+    public ResponseEntity<String> resetPasswordGet() {
+        return ResponseEntity.ok("This endpoint expects a POST request with JSON body");
+    }
 }
+
