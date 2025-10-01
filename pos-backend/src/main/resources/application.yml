@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: pos-system
+
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:pos}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:your_email}
+    password: ${MAIL_PASSWORD:your_gmail_app_password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  devtools:
+    livereload:
+      enabled: true
+
+server:
+  # ✅ Use Railway’s provided PORT env, default 8080 locally
+  port: ${PORT:8080}
+
+razorpay:
+  api:
+    key: ${RAZORPAY_KEY:your_razorpay_key}
+    secret: ${RAZORPAY_SECRET:your_razorpay_secret}
+
+stripe:
+  api:
+    key: ${STRIPE_KEY:your_stripe_key}
+
+app:
+  frontend:
+    # ✅ local fallback; override in Railway to Vercel domain
+    reset-url: ${FRONTEND_RESET_URL:http://localhost:5173/auth/reset-password?token=}
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
