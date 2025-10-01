@@ -3,10 +3,11 @@ spring:
     name: pos-system
 
   datasource:
-    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQL_DATABASE}
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQL_DATABASE:railway}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${MYSQLUSER}
-    password: ${MYSQL_ROOT_PASSWORD}
+    username: ${MYSQLUSER:root}
+    password: ${MYSQL_ROOT_PASSWORD:root}
+    initialization-mode: always
 
   jpa:
     hibernate:
@@ -18,12 +19,12 @@ server:
 
 razorpay:
   api:
-    key: ${RAZORPAY_KEY:your_razorpay_key}
-    secret: ${RAZORPAY_SECRET:your_razorpay_secret}
+    key: ${RAZORPAY_KEY:dummy_key}
+    secret: ${RAZORPAY_SECRET:dummy_secret}
 
 stripe:
   api:
-    key: ${STRIPE_KEY:your_stripe_key}
+    key: ${STRIPE_KEY:dummy_key}
 
 app:
   frontend:
@@ -31,8 +32,8 @@ app:
 
 logging:
   level:
-    root: INFO
-    org.springframework:
+    root: DEBUG
+    org:
       hibernate:
         SQL: DEBUG
         type:
