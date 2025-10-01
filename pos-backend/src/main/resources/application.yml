@@ -3,11 +3,10 @@ spring:
     name: pos-system
 
   datasource:
-    # Use host.docker.internal to let container access MySQL on host
-    url: jdbc:mysql://${DB_HOST:host.docker.internal}:${DB_PORT:3301}/${DB_NAME:pos}
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQL_DATABASE}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:root}
+    username: ${MYSQLUSER}
+    password: ${MYSQLPASSWORD}
 
   jpa:
     hibernate:
@@ -17,24 +16,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${MAIL_USERNAME:your_email}
-    password: ${MAIL_PASSWORD:your_gmail_app_password}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
-  devtools:
-    livereload:
-      enabled: true
-
 server:
   port: ${PORT:5000}
+
 
 razorpay:
   api:
